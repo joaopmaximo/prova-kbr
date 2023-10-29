@@ -198,7 +198,7 @@
     </section>
     <main class="max-w-7xl mx-2 lg:mx-auto">
       <!-- Inscrições abertas -->
-      <form class="py-12">
+      <form class="py-12" action="/atleta" method="POST">
         <h2 class="text-center text-3xl text-blue-700 mt-4 mb-8">
           Formulário de inscrição para o torneio
         </h2>
@@ -210,6 +210,7 @@
             <input
               type="text"
               id="nome"
+              name="nome"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="Seu nome"
               required
@@ -222,6 +223,7 @@
             <input
               type="date"
               id="nascimento"
+              name="data_nascimento"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
             />
@@ -233,6 +235,7 @@
             <input
               type="text"
               id="cpf"
+              name="cpf"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="000.000.000-00"
               required
@@ -245,6 +248,7 @@
             <input
               type="email"
               id="email"
+              name="email"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="Seu e-mail"
               required
@@ -253,16 +257,17 @@
         </div>
         <div class="mt-4 flex gap-4">
           <div class="w-full">
-            <label for="faixa" class="block mb-2 text-lg font-medium"
+            <label for="genero" class="block mb-2 text-lg font-medium"
               >Gênero</label
             >
             <select
-              id="faixa"
+              id="genero"
+              name="sexo"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option selected value="none">Escolha um gênero</option>
-              <option value="marrom">Masculino</option>
-              <option value="preta">Feminino</option>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
             </select>
           </div>
           <div class="w-full">
@@ -272,6 +277,7 @@
             <input
               type="text"
               id="equipe"
+              name="equipe"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="Sua equipe"
               required
@@ -285,6 +291,7 @@
             >
             <select
               id="faixa"
+              name="faixa"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option selected value="none">Escolha uma faixa</option>
@@ -298,6 +305,7 @@
             >
             <select
               id="peso"
+              name="peso"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
               <option selected value="none">Escolha um peso</option>
@@ -314,6 +322,7 @@
             <input
               type="password"
               id="senha"
+              name="senha"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="**********"
               required
@@ -326,6 +335,7 @@
             <input
               type="password"
               id="confirmar_senha"
+              name="confirmar_senha"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="**********"
               required
@@ -334,7 +344,7 @@
         </div>
         <div class="mt-8 flex justify-center">
           <button
-            type="button"
+            type="submit"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             Inscreva-se agora mesmo

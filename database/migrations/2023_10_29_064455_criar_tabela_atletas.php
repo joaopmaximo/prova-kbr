@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('senha');
             $table->string('equipe');
             $table->string('faixa');
-            $table->float('peso');
+            $table->string('peso');
             $table->timestamps(); //timesamp ja pega data de inscricao
         });
     }

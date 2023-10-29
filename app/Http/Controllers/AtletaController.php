@@ -17,18 +17,21 @@ class AtletaController extends Controller
     }
 
     public function postAtleta(Request $request) {
-        $atleta =Atleta::create ([
-            'nome' => $request->nome,
-            'data_nascimento' => $request->data_nascimento,
-            'cpf' => $request->cpf,
-            'sexo' => $request->sexo,
-            'email' => $request->email,
-            'senha' => $request->senha,
-            'equipe' => $request->equipe,
-            'faixa' => $request->faixa,
-            'peso' => $request->peso
-        ]);
-        return response()->json($atleta);
+        if ($request->confirmar_senha == $request->senha) {
+            $atleta =Atleta::create ([
+                'nome' => $request->nome,
+                'data_nascimento' => $request->data_nascimento,
+                'cpf' => $request->cpf,
+                'sexo' => $request->sexo,
+                'email' => $request->email,
+                'senha' => $request->senha,
+                'equipe' => $request->equipe,
+                'faixa' => $request->faixa,
+                'peso' => $request->peso
+            ]);
+            return response()->json($atleta);
+        }
+        return response(null, 400);
     }
 
     public function putAtleta(Request $request, $id) {
