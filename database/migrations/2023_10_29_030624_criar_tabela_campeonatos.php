@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('sobre_evento');
             $table->string('ginasio');
             $table->string('informacoes_gerais');
-            $table->string('entrada_publico');
+            $table->string('entrada_publico')->nullable();
+            $table->string('tipo');
             $table->string('fase');
             $table->boolean('status');
             $table->timestamps();

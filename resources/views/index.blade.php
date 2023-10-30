@@ -145,16 +145,16 @@
               <div
                 class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
               >
-                <p class="text-2xl font-bold" data-calendar>21</p>
-                <p>NOV</p>
+                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(0)->data_realizacao)) }}</p>
+                <p>{{ $mes[date('M', strtotime($campeonatos->get(0)->data_realizacao))] }}</p>
               </div>
               <p
                 class="absolute -top-3 left-24 bg-yellow-600 px-3 text-white rounded-xl"
               >
-                Chaveamento
+                {{ $campeonatos->get(0)->fase }}
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-                Campeonato regional santista 2023
+                {{ $campeonatos->get(0)->titulo_campeonato }}
               </h3>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -228,7 +228,7 @@
                 Inscrições abertas
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-                Torneio Estadual Infantil 2024
+              {{ $campeonatos->get(1)->titulo_campeonato }}
               </h3>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -302,7 +302,7 @@
                 Classificação
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-                Maia Championship nacional 2023
+              {{ $campeonatos->get(2)->titulo_campeonato }}
               </h3>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -376,7 +376,7 @@
                 Chaveamento
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-                Campeonato regional santista 2023
+              {{ $campeonatos->get(3)->titulo_campeonato }}
               </h3>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg

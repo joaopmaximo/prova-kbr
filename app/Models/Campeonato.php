@@ -17,6 +17,7 @@ class Campeonato extends Model
         'ginasio',
         'informacoes_gerais',
         'entrada_publico',
+        'tipo',
         'fase',
         'status'
     ];
