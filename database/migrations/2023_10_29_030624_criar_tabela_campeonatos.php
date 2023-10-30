@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('tipo');
             $table->string('fase');
             $table->boolean('status');
+            $table->boolean('destaque')->default(false);
             $table->timestamps();
         });
     }

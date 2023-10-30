@@ -19,6 +19,7 @@ class Campeonato extends Model
         'entrada_publico',
         'tipo',
         'fase',
-        'status'
+        'status',
+        'destaque'
     ];
 }

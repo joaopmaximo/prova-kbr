@@ -176,7 +176,7 @@
                     d="M6 6h.008v.008H6V6z"
                   />
                 </svg>
-                Kimono
+                {{ $campeonatos->get(0)->tipo }}
               </p>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -198,7 +198,7 @@
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-                Santos-SP
+                {{ $campeonatos->get(0)->cidade_estado }}
               </p>
             </div>
             <a
@@ -219,13 +219,13 @@
               <div
                 class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
               >
-                <p class="text-2xl font-bold" data-calendar>15</p>
-                <p>JAN</p>
+                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(1)->data_realizacao)) }}</p>
+                <p>{{ $mes[date('M', strtotime($campeonatos->get(1)->data_realizacao))] }}</p>
               </div>
               <p
                 class="absolute -top-3 left-24 bg-green-600 px-3 text-white rounded-xl"
               >
-                Inscrições abertas
+              {{ $campeonatos->get(1)->fase }}
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
               {{ $campeonatos->get(1)->titulo_campeonato }}
@@ -250,7 +250,7 @@
                     d="M6 6h.008v.008H6V6z"
                   />
                 </svg>
-                Kimono
+                {{ $campeonatos->get(1)->tipo }}
               </p>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -272,7 +272,7 @@
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-                São Paulo-SP
+                {{ $campeonatos->get(1)->cidade_estado }}
               </p>
             </div>
             <a
@@ -293,13 +293,13 @@
               <div
                 class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
               >
-                <p class="text-2xl font-bold" data-calendar>23</p>
-                <p>OUT</p>
+                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(2)->data_realizacao)) }}</p>
+                <p>{{ $mes[date('M', strtotime($campeonatos->get(2)->data_realizacao))] }}</p>
               </div>
               <p
                 class="absolute -top-3 left-24 bg-blue-700 px-3 text-white rounded-xl"
               >
-                Classificação
+              {{ $campeonatos->get(2)->fase }}
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
               {{ $campeonatos->get(2)->titulo_campeonato }}
@@ -324,7 +324,7 @@
                     d="M6 6h.008v.008H6V6z"
                   />
                 </svg>
-                No GI
+                {{ $campeonatos->get(2)->tipo }}
               </p>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -346,7 +346,7 @@
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-                Rio de Janeiro-RJ
+                {{ $campeonatos->get(2)->cidade_estado }}
               </p>
             </div>
             <a
@@ -367,13 +367,13 @@
               <div
                 class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
               >
-                <p class="text-2xl font-bold" data-calendar>21</p>
-                <p>NOV</p>
+                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(3)->data_realizacao)) }}</p>
+                <p>{{ $mes[date('M', strtotime($campeonatos->get(3)->data_realizacao))] }}</p>
               </div>
               <p
                 class="absolute -top-3 left-24 bg-yellow-600 px-3 text-white rounded-xl"
               >
-                Chaveamento
+              {{ $campeonatos->get(3)->fase }}
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
               {{ $campeonatos->get(3)->titulo_campeonato }}
@@ -398,7 +398,7 @@
                     d="M6 6h.008v.008H6V6z"
                   />
                 </svg>
-                Kimono
+                {{ $campeonatos->get(3)->tipo }}
               </p>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -420,7 +420,7 @@
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-                Santos-SP
+                {{ $campeonatos->get(3)->cidade_estado }}
               </p>
             </div>
             <a
