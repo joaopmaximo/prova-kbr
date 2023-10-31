@@ -13,13 +13,19 @@ class CampeonatoController extends Controller
 
     public function getCampeonato($id) {
         $campeonato =Campeonato::findOrFail($id);
+
         return response()->json($campeonato);
     }
 
     public function postCampeonato(Request $request) {
+        // manipulando o upload da imagem
+        $extension = $request->imagem->extension();
+        $imageName = md5($request->imagem->getClientOriginalName() . strtotime("now")) . "." . $extension;
+        $request->imagem->move(public_path("/imgs"), $imageName);
+
         $campeonato =Campeonato::create ([
             'titulo_campeonato' => $request->titulo_campeonato,
-            'imagem' => $request->imagem,
+            'imagem' => $imageName,
             'cidade_estado' => $request->cidade . ", " . $request->estado,
             'data_realizacao' => $request->data_realizacao,
             'sobre_evento' => $request->sobre_evento,
@@ -30,6 +36,7 @@ class CampeonatoController extends Controller
             'fase' => $request->fase,
             'status' => $request->status
         ]);
+
         return response()->json($campeonato);
     }
 
@@ -47,12 +54,14 @@ class CampeonatoController extends Controller
         $campeonato->fase = $request->fase;
         $campeonato->status = $request->status;
         $campeonato->save();
+
         return response()->json($campeonato);
     }
 
     public function deleteCampeonato($id) {
         $campeonato =Campeonato::findOrFail($id);
         $campeonato->delete();
+
         return response(null, 204);
     }
 }

@@ -26,8 +26,32 @@ class PagesController extends Controller
         return view('index', compact('campeonatos', 'mes'));
     }
 
-    public function integra() {
-        return view('integra');
+    public function integra($id) {
+        $mes = array(
+            'Jan' => 'Janeiro',
+            'Feb' => 'Fevereiro',
+            'Mar' => 'Marco',
+            'Apr' => 'Abril',
+            'May' => 'Maio',
+            'Jun' => 'Junho',
+            'Jul' => 'Julho',
+            'Aug' => 'Agosto',
+            'Nov' => 'Novembro',
+            'Sep' => 'Setembro',
+            'Oct' => 'Outubro',
+            'Dec' => 'Dezembro'
+        );
+        $semana = array(
+            'Sun' => 'Domingo', 
+            'Mon' => 'Segunda-Feira',
+            'Tue' => 'Terca-Feira',
+            'Wed' => 'Quarta-Feira',
+            'Thu' => 'Quinta-Feira',
+            'Fri' => 'Sexta-Feira',
+            'Sat' => 'Sábado'
+        );
+        $campeonato = Campeonato::find($id);
+        return view('integra', compact('campeonato', 'mes', 'semana'));
     }
 
     public function inscricao() {

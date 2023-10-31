@@ -8,7 +8,7 @@
                 <a href="painel.html" class="btn btn-light">Voltar</a>
             </div>
 
-            <form action="/campeonato" method="POST" class="bg-custom rounded col-12 py-3 px-4">
+            <form action="/campeonato" method="POST" class="bg-custom rounded col-12 py-3 px-4" enctype="multipart/form-data">
                 
                 <div class="mb-3 row">
                     <label for="titulo_campeonato" class="col-sm-2 col-form-label">Título:</label>
@@ -20,7 +20,7 @@
                 <div class="mb-3 row">
                     <label for="imagem" class="col-sm-2 col-form-label">Imagem:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control bg-dark text-light border-dark" id="imagem" name="imagem">
+                        <input type="file" class="form-control-file bg-dark text-light border-dark" id="imagem" name="imagem">
                     </div>
                 </div>
 
@@ -122,6 +122,5 @@
             <div class="bg-custom rounded overflow-hidden">
 
             </div>
-        
 
 @endsection
