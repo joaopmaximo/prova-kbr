@@ -72,11 +72,12 @@
         <div
           class="max-w-7xl mx-2 lg:mx-auto mt-6 flex flex-col lg:flex-row gap-4"
         >
+@for ($i = 0; $i < 4; $i++)
           <article
             class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300"
           >
             <img
-              src="imgs/torneio-card.jpg"
+              src="{{ asset('imgs/' . $campeonatos->get($i)->imagem) }}"
               alt="Imagem do torneio"
               class="rounded-md w-full h-[200px] object-cover"
             />
@@ -84,16 +85,16 @@
               <div
                 class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
               >
-                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(0)->data_realizacao)) }}</p>
-                <p>{{ $mes[date('M', strtotime($campeonatos->get(0)->data_realizacao))] }}</p>
+                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get($i)->data_realizacao)) }}</p>
+                <p>{{ $mes[date('M', strtotime($campeonatos->get($i)->data_realizacao))] }}</p>
               </div>
               <p
                 class="absolute -top-3 left-24 bg-yellow-600 px-3 text-white rounded-xl"
               >
-                {{ $campeonatos->get(0)->fase }}
+                {{ $campeonatos->get($i)->fase }}
               </p>
               <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-                {{ $campeonatos->get(0)->titulo_campeonato }}
+                {{ $campeonatos->get($i)->titulo_campeonato }}
               </h3>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -115,7 +116,7 @@
                     d="M6 6h.008v.008H6V6z"
                   />
                 </svg>
-                {{ $campeonatos->get(0)->tipo }}
+                {{ $campeonatos->get($i)->tipo }}
               </p>
               <p class="text-gray-400 flex gap-2 my-2">
                 <svg
@@ -137,237 +138,16 @@
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-                {{ $campeonatos->get(0)->cidade_estado }}
+                {{ $campeonatos->get($i)->cidade_estado }}
               </p>
             </div>
             <a
-              href="{{ route('integra', ['id' => $campeonatos->get(0)->id]) }}"
+              href="{{ route('integra', ['id' => $campeonatos->get($i)->id]) }}"
               title="Saiba mais sobre Campeonato regional santista 2023"
               class="absolute inset-0"
             ></a>
           </article>
-          <article
-            class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300"
-          >
-            <img
-              src="imgs/torneio-infantil.jpg"
-              alt="Imagem do torneio"
-              class="rounded-md w-full h-[200px] object-cover"
-            />
-            <div class="p-3 relative">
-              <div
-                class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
-              >
-                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(1)->data_realizacao)) }}</p>
-                <p>{{ $mes[date('M', strtotime($campeonatos->get(1)->data_realizacao))] }}</p>
-              </div>
-              <p
-                class="absolute -top-3 left-24 bg-green-600 px-3 text-white rounded-xl"
-              >
-              {{ $campeonatos->get(1)->fase }}
-              </p>
-              <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-              {{ $campeonatos->get(1)->titulo_campeonato }}
-              </h3>
-              <p class="text-gray-400 flex gap-2 my-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 6h.008v.008H6V6z"
-                  />
-                </svg>
-                {{ $campeonatos->get(1)->tipo }}
-              </p>
-              <p class="text-gray-400 flex gap-2 my-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                {{ $campeonatos->get(1)->cidade_estado }}
-              </p>
-            </div>
-            <a
-              href="./integra.html"
-              title="Saiba mais sobre Campeonato regional santista 2023"
-              class="absolute inset-0"
-            ></a>
-          </article>
-          <article
-            class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300"
-          >
-            <img
-              src="imgs/maia.webp"
-              alt="Imagem do torneio"
-              class="rounded-md w-full h-[200px] object-cover"
-            />
-            <div class="p-3 relative">
-              <div
-                class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
-              >
-                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(2)->data_realizacao)) }}</p>
-                <p>{{ $mes[date('M', strtotime($campeonatos->get(2)->data_realizacao))] }}</p>
-              </div>
-              <p
-                class="absolute -top-3 left-24 bg-blue-700 px-3 text-white rounded-xl"
-              >
-              {{ $campeonatos->get(2)->fase }}
-              </p>
-              <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-              {{ $campeonatos->get(2)->titulo_campeonato }}
-              </h3>
-              <p class="text-gray-400 flex gap-2 my-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 6h.008v.008H6V6z"
-                  />
-                </svg>
-                {{ $campeonatos->get(2)->tipo }}
-              </p>
-              <p class="text-gray-400 flex gap-2 my-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                {{ $campeonatos->get(2)->cidade_estado }}
-              </p>
-            </div>
-            <a
-              href="./integra.html"
-              title="Saiba mais sobre Campeonato regional santista 2023"
-              class="absolute inset-0"
-            ></a>
-          </article>
-          <article
-            class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300"
-          >
-            <img
-              src="imgs/torneio-card.jpg"
-              alt="Imagem do torneio"
-              class="rounded-md w-full h-[200px] object-cover"
-            />
-            <div class="p-3 relative">
-              <div
-                class="absolute -top-14 bg-white px-4 py-2 rounded-md shadow-md shadow-gray-500 text-center"
-              >
-                <p class="text-2xl font-bold" data-calendar>{{ date('d', strtotime($campeonatos->get(3)->data_realizacao)) }}</p>
-                <p>{{ $mes[date('M', strtotime($campeonatos->get(3)->data_realizacao))] }}</p>
-              </div>
-              <p
-                class="absolute -top-3 left-24 bg-yellow-600 px-3 text-white rounded-xl"
-              >
-              {{ $campeonatos->get(3)->fase }}
-              </p>
-              <h3 class="mt-4 uppercase text-xl min-h-[60px]">
-              {{ $campeonatos->get(3)->titulo_campeonato }}
-              </h3>
-              <p class="text-gray-400 flex gap-2 my-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 6h.008v.008H6V6z"
-                  />
-                </svg>
-                {{ $campeonatos->get(3)->tipo }}
-              </p>
-              <p class="text-gray-400 flex gap-2 my-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                {{ $campeonatos->get(3)->cidade_estado }}
-              </p>
-            </div>
-            <a
-              href="./integra.html"
-              title="Saiba mais sobre Campeonato regional santista 2023"
-              class="absolute inset-0"
-            ></a>
-          </article>
+@endfor
         </div>
       </section>
       <section aria-labelledby="torneios_titulo" class="py-12">

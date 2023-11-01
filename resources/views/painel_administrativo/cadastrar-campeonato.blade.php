@@ -1,14 +1,13 @@
-@extends('painel_administrativo.layout')
+@extends('painel_administrativo.aside')
 
-@section('conteudo')
-
+@section('conteudoAside')
 <div class="d-flex align-items-end justify-content-between mb-4">
                 <h1 class="h3">Cadastrar Campeonato</h1>
 
                 <a href="painel.html" class="btn btn-light">Voltar</a>
             </div>
 
-            <form action="/campeonato" method="POST" class="bg-custom rounded col-12 py-3 px-4" enctype="multipart/form-data">
+            <form action="{{ route('postCampeonato') }}" method="POST" class="bg-custom rounded col-12 py-3 px-4" enctype="multipart/form-data">
                 
                 <div class="mb-3 row">
                     <label for="titulo_campeonato" class="col-sm-2 col-form-label">Título:</label>
@@ -122,5 +121,4 @@
             <div class="bg-custom rounded overflow-hidden">
 
             </div>
-
 @endsection

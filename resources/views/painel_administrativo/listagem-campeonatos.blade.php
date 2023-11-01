@@ -1,8 +1,6 @@
-@extends('painel_administrativo.layout')
+@extends('painel_administrativo.aside')
 
-@section('conteudo')
-
-
+@section('conteudoAside')
 <div class="d-flex justify-content-between mb-4">
                 <h1 class="h3">Usuários</h1>
 
