@@ -18,7 +18,7 @@
             </svg>
         </a>
 
-        <a href="cadastrar.html" class="btn btn-light">+ Cadastrar Usuário</a>
+        <a href="{{ route('cadastrarUsuario') }}" class="btn btn-light">+ Cadastrar Usuário</a>
     </div>
 </div>
 

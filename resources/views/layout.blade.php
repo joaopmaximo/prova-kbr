@@ -4,7 +4,7 @@
         <div
           class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
         >
-          <a href="/" class="flex items-center">
+          <a href="{{ route('index') }}" class="flex items-center">
             <img src="{{ asset('imgs/logo.svg') }}" alt="Logo" />
             <p id="logo">OSU BJJ</p>
           </a>
@@ -53,7 +53,7 @@
               </li>
               <li>
                 <a
-                  href="./area_atleta/area_restrita.html"
+                  href="{{ route('loginAtleta') }}"
                   class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center"
                 >
                   Área do competidor

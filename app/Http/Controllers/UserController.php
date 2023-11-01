@@ -4,10 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    public function painelAdmLogin() {
+        if(Auth::check() && (Auth::user()->role == "2"|| Auth::user()->role == "1")) {
+            return redirect(route('painelAdm'));
+        } else if(Auth::check()) {
+            return redirect(route('index'));
+        }
+        return view('painel_administrativo.login');
+    }
+
+    public function painelAdm() {
+        return view('painel_administrativo.listagem-usuarios');
+    }
+
+    public function painelAdmCadastroUsuario() {
+        return view('painel_administrativo.cadastrar-usuario');
+    }
+
+    public function painelAdmCadastroCampeonato() {
+        return view('painel_administrativo.cadastrar-campeonato');
+    }
+
+    public function painelAdmListagemCampeonatos() {
+        return view('painel_administrativo.listagem-campeonatos');
+    }
+
     public function getUsers() {
         return response()->json(User::all());
     }

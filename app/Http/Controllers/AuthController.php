@@ -22,9 +22,16 @@ class AuthController extends Controller
         // verifica se as credenciais estao no banco de dados
         if ($teste = Auth::attempt($credentials)) {
             $request->session()->regenerate(); // gera um id para a sessão
-            return redirect()->intended('/painel-administrativo/cadastrar-usuario'); // redirecionamento
+            return redirect(route('painelAdm')); // redirecionamento
         } else {
             return redirect()->back()->with('erro', 'Email ou senha inválido');
         }
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect(route('painelAdmLogin'));
     }
 }

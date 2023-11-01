@@ -43,4 +43,5 @@ class PagesController extends Controller
         return view('integra', ['campeonato' => $campeonato, 'mes' => $this->mes, 'semana' => $this->semana]);
     }
 
+    
 }
