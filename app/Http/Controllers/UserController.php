@@ -11,7 +11,7 @@ class UserController extends Controller
 {
 
     public function painelAdmLogin() {
-        if(Auth::check() && (Auth::user()->role == "2"|| Auth::user()->role == "1")) {
+        if(Auth::check() && (Auth::user()->role == "0"|| Auth::user()->role == "1")) {
             return redirect(route('painelAdm'));
         } else if(Auth::check()) {
             return redirect(route('index'));
@@ -50,8 +50,9 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password'=> Hash::make($request->password),
+                'role'=> Hash::make($request->role)
             ]);
-            return response()->json($user);
+            return redirect(route('cadastrarUsuario'))->with('sucesso', 'Usuário cadastrado com sucesso!');
         }
         return response(null, 400);
     }

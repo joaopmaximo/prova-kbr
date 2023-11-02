@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Atleta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AtletaController extends Controller
 {
+    public function areaAtleta() {
+        return view("area_atleta.area-atleta");
+    }
     public function getAtletas() {
         return response()->json(Atleta::all());
     }
@@ -24,7 +28,7 @@ class AtletaController extends Controller
                 'cpf' => $request->cpf,
                 'sexo' => $request->sexo,
                 'email' => $request->email,
-                'senha' => $request->senha,
+                'senha'=> Hash::make($request->password),
                 'equipe' => $request->equipe,
                 'faixa' => $request->faixa,
                 'peso' => $request->peso

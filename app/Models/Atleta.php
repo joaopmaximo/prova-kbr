@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Atleta extends Model
+class Atleta extends Authenticatable
 {
     use HasFactory;
     protected $fillable = [
@@ -18,5 +18,10 @@ class Atleta extends Model
         'equipe',
         'faixa',
         'peso',
+    ];
+
+    protected $hidden = [
+        'senha',
+        'remember_token',
     ];
 }

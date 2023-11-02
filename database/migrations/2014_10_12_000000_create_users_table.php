@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            // 0 = atleta | 1 = usuario | 2 = admin
-            $table->tinyInteger('role')->default(0);
+            // 0 = usuario | 1 = admin
+            $table->boolean('role')->default(0);
             $table->timestamps();
         });
     }

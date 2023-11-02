@@ -2,22 +2,22 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Atleta;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserRoleMiddleware
+class AtletaRoleMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // Verifica a role do usuario e faz a checagem em relação a role esperada da rota
-    public function handle(Request $request, Closure $next, ...$role): Response
+    public function handle(Request $request, Closure $next, $role = ''): Response
     {
-        if (Auth::check() && in_array(Auth::user()->role, $role)) {
+        if (Auth::User() instanceOf Atleta || Auth::User()->role == $role) {
             return $next($request);
         }
         return redirect(route('index'));
