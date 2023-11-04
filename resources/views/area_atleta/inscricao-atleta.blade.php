@@ -2,7 +2,7 @@
   @section('conteudo')
     <section class="relative h-[300px]">
       <img
-        src="imgs/integra.jpg"
+        src="{{ asset('imgs/' . $campeonato->imagem) }}"
         alt="Lutadores de Jiu jitsu executam golpe durante treino"
         class="w-full h-full object-cover"
       />

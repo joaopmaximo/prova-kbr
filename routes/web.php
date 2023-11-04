@@ -3,35 +3,46 @@
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\CampeonatoController;
 use App\Http\Controllers\AtletaController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/teste', function () {
-        dd(Auth::check());
+Route::post('/teste', function (Request $request) {
+    if (Auth::guard('atleta')->attempt($request->all())) {
+        return redirect('/teste2');
+    }
+    
+    return 'Falha na autenticação';
 });
 
-Route::get('/', [PagesController::class, 'index'])->name('index');
+Route::get('/teste2', function () {
+    dd(Auth::guard('atleta')->check());
+});
+
+
+Route::get('/', [PagesController::class, 'home'])->name('home');
+
+Route::redirect('/home', '/');
 
 Route::get('/integra/{id}', [PagesController::class, 'integra'])->name('integra');
 
 Route::get('/inscricao/{id}', [CampeonatoController::class, 'inscricaoAtleta'])->name('inscricaoAtleta');
 
-Route::view('/login', 'area_atleta.login-atleta')->name('loginAtleta');
+Route::get('/login', [AuthController::class, 'loginAtleta'])->name('loginAtleta');
 
-Route::get('/painel-administrativo/login', [UserController::class, 'painelAdmLogin'])->name('painelAdmLogin');
+Route::get('/painel-administrativo/login', [AuthController::class, 'loginUser'])->name('loginUser');
 
 Route::post('/painel-administrativo/auth', [AuthController::class,'authUser'])->name('authUser');
 
-Route::post('/auth', [LoginController::class,'authAtleta'])->name('authAtleta');
+Route::post('/auth', [AuthController::class,'authAtleta'])->name('authAtleta');
 
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
 Route::post('/atleta/{idCampeonato}', [AtletaController::class, 'postAtleta'])->name('postAtleta');
 
-Route::middleware(['auth', 'atletaRole'])->group(function () {
+Route::middleware('atletaRole')->group(function () {
     
     Route::get('/area-atleta', [AtletaController::class,'areaAtleta'])->name('areaAtleta');
 

@@ -31,10 +31,10 @@ class PagesController extends Controller
         'Sat' => 'Sábado'
     );
 
-    public function index() {
+    public function home() {
         $campeonatos = Campeonato::orderBy("created_at","desc")->get();
         
-        return view('index', ['campeonatos' => $campeonatos, 'mes' => $this->mes]);
+        return view('home', ['campeonatos' => $campeonatos, 'mes' => $this->mes]);
     }
     
     public function integra($id) {

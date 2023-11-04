@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Atleta;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +14,12 @@ class AtletaRoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role = ''): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::User() instanceOf Atleta || Auth::User()->role == $role) {
+        if (Auth::guard('atleta')->check()) {
             return $next($request);
         }
-        return redirect(route('index'));
+        
+        return redirect(route('loginAtleta'));
     }
 }

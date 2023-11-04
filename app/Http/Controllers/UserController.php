@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Brazanation\States\States;
+use Brazanation\States\Cities;
 
 class UserController extends Controller
 {
@@ -35,7 +37,7 @@ class UserController extends Controller
     }
 
     public function painelAdmCadastrarCampeonato() {
-        return view('painel_administrativo.cadastrar-campeonato');
+        return view('painel_administrativo.cadastrar-campeonato', ['estados' => States::all()]);
     }
 
     public function painelAdmListagemCampeonatos() {
