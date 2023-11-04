@@ -11,7 +11,8 @@ class Campeonato extends Model
     protected $fillable = [
         'titulo_campeonato',
         'imagem',
-        'cidade_estado',
+        'estado',
+        'cidade',
         'data_realizacao',
         'sobre_evento',
         'ginasio',
@@ -22,4 +23,8 @@ class Campeonato extends Model
         'status',
         'destaque'
     ];
+
+    public function atletas() {
+        return $this->belongsToMany(Campeonato::class);
+    }
 }

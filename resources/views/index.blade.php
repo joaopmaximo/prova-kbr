@@ -31,7 +31,7 @@
         <div
           class="max-w-7xl mx-2 lg:mx-auto mt-6 flex flex-col lg:flex-row gap-4"
         >
-@for ($i = 0; $i < 4; $i++)
+          @for ($i = 0; $i < 4; $i++)
           <article
             class="relative w-full rounded-xl overflow-hidden shadow-xl p-2 outline outline-1 outline-gray-400 text-gray-900 hover:-translate-y-2 transition-transform duration-300"
           >
@@ -97,7 +97,7 @@
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                   />
                 </svg>
-                {{ $campeonatos->get($i)->cidade_estado }}
+                {{ $campeonatos->get($i)->cidade . ", " . $campeonatos->get($i)->estado }}
               </p>
             </div>
             <a
@@ -106,7 +106,7 @@
               class="absolute inset-0"
             ></a>
           </article>
-@endfor
+          @endfor
         </div>
       </section>
       <section aria-labelledby="torneios_titulo" class="py-12">

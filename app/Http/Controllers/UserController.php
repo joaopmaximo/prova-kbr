@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campeonato;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,19 +21,31 @@ class UserController extends Controller
     }
 
     public function painelAdm() {
-        return view('painel_administrativo.listagem-usuarios');
+        $usuarios = User::all();
+        return view('painel_administrativo.listagem-usuarios', compact('usuarios'));
     }
 
-    public function painelAdmCadastroUsuario() {
+    public function painelAdmCadastrarUsuario() {
         return view('painel_administrativo.cadastrar-usuario');
     }
 
-    public function painelAdmCadastroCampeonato() {
+    public function painelAdmEditarUsuario($id) {
+        $usuario = User::findOrFail($id);
+        return view('painel_administrativo.editar-usuario', compact('usuario'));
+    }
+
+    public function painelAdmCadastrarCampeonato() {
         return view('painel_administrativo.cadastrar-campeonato');
     }
 
     public function painelAdmListagemCampeonatos() {
-        return view('painel_administrativo.listagem-campeonatos');
+        $campeonatos = Campeonato::all();
+        return view('painel_administrativo.listagem-campeonatos', compact('campeonatos'));
+    }
+
+    public function painelAdmEditarCampeonato($id) {
+        $campeonato = Campeonato::findOrFail($id);
+        return view('painel_administrativo.editar-campeonato', compact('campeonato'));
     }
 
     public function getUsers() {
@@ -45,16 +58,31 @@ class UserController extends Controller
     }
 
     public function postUser(Request $request) {
-        if ($request->confPass == $request->password) {
-            $user = User::create ([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password'=> Hash::make($request->password),
-                'role'=> Hash::make($request->role)
+        $credentials = $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'password'=> ['required'],
+            'confPass'=> ['required'],
+            'role'=> ['required']
+        ], [
+            'name.required' => 'O campo nome é obrigatório!',
+            'email.required' => 'O campo email é obrigatório!',
+            'email.email' => 'O email não é válido!',
+            'password.required' => 'O campo senha é obrigatório!',
+            'confPass.required' => 'O campo confirmar senha é obrigatório!',
+            'role.required' => 'O campo permissões é obrigatório!'
+        ]);
+
+        if ($credentials['confPass'] == $credentials['password']) {
+            User::create ([
+                'name' => $credentials['name'],
+                'email' => $credentials['email'],
+                'password'=> Hash::make($credentials['password']),
+                'role'=> $credentials['role']
             ]);
-            return redirect(route('cadastrarUsuario'))->with('sucesso', 'Usuário cadastrado com sucesso!');
+            return redirect()->back()->with('mensagem', 'Usuário cadastrado com sucesso!');
         }
-        return response(null, 400);
+        return redirect()->back()->with('mensagem', 'Senhas não conferem');
     }
 
     public function putUser(Request $request, $id) {
@@ -63,12 +91,12 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        return response()->json($user);
+        return redirect()->back()->with('mensagem','Usuário alterado com sucesso!');
     }
 
     public function deleteUser($id) {
         $user = User::findOrFail($id);
         $user->delete();
-        return response(null, 204);
+        return redirect()->back();
     }
 }

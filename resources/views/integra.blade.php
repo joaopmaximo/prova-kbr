@@ -41,7 +41,7 @@
             d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
           />
         </svg>
-        {{ $campeonato->cidade_estado }}
+        {{ $campeonato->cidade . ", " . $campeonato->estado }}
       </p>
       <p class="text-gray-500 flex gap-2 my-2">
         <svg
@@ -154,7 +154,7 @@
     </article>
     <div class="mt-8 flex justify-center">
       <a
-        href="{{ route('inscricaoAtleta') }}"
+        href="{{ route('inscricaoAtleta', $campeonato->id) }}"
         class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800"
       >
         Inscreva-se agora mesmo

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cpf');
             $table->string('sexo');
             $table->string('email');
-            $table->string('senha');
+            $table->string('password');
             $table->string('equipe');
             $table->string('faixa');
             $table->string('peso');

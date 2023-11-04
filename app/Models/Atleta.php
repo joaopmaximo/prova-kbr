@@ -2,26 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Atleta extends Authenticatable
 {
     use HasFactory;
+
+    protected $guard = 'atleta';
     protected $fillable = [
         'nome',
         'data_nascimento',
         'cpf',
         'sexo',
         'email',
-        'senha',
+        'password',
         'equipe',
         'faixa',
-        'peso',
+        'peso'
     ];
 
     protected $hidden = [
-        'senha',
-        'remember_token',
+        'password',
+        'remember_token'
     ];
+
+    public function campeonatos() {
+        return $this->belongsToMany(Campeonato::class);
+    }
 }

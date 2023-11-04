@@ -9,7 +9,7 @@
       <div class="bg-black/70 grid place-items-center absolute inset-0">
         <div>
           <h1 class="text-center text-4xl text-white mt-4 mb-8">
-            Campeonato Regional Santista 2023
+            {{ $campeonato->titulo_campeonato }}
           </h1>
           <div class="flex gap-2 justify-center text-sm">
             <p class="text-white flex items-center gap-2">
@@ -27,7 +27,7 @@
                   d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"
                 />
               </svg>
-              241223
+              {{ $campeonato->id }}
             </p>
             <p class="text-white flex items-center gap-2">
               <svg
@@ -49,7 +49,7 @@
                   d="M6 6h.008v.008H6V6z"
                 />
               </svg>
-              Kimono
+              {{ $campeonato->tipo }}
             </p>
             <p class="text-white flex items-center gap-2">
               <svg
@@ -71,7 +71,7 @@
                   d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                 />
               </svg>
-              Santos-SP
+              {{ $campeonato->cidade . ", " . $campeonato->estado }}
             </p>
             <p class="text-white flex items-center gap-2">
               <svg
@@ -88,7 +88,7 @@
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
                 />
               </svg>
-              <time datetime="2023-11-21">21/11/2023</time>
+              <time datetime="2023-11-21">{{ date('d/m/Y', strtotime($campeonato->data_realizacao)) }}</time>
             </p>
           </div>
         </div>
@@ -96,7 +96,7 @@
     </section>
     <main class="max-w-7xl mx-2 lg:mx-auto">
       <!-- Inscrições abertas -->
-      <form class="py-12" action="{{ route('postAtleta') }}" method="POST">
+      <form class="py-12" action="{{ route('postAtleta', ['idCampeonato' => $campeonato->id]) }}" method="POST">
         <h2 class="text-center text-3xl text-blue-700 mt-4 mb-8">
           Formulário de inscrição para o torneio
         </h2>
@@ -214,32 +214,35 @@
         </div>
         <div class="mt-4 flex gap-4">
           <div class="w-full">
-            <label for="senha" class="block mb-2 text-lg font-medium"
+            <label for="password" class="block mb-2 text-lg font-medium"
               >Senha</label
             >
             <input
               type="password"
-              id="senha"
-              name="senha"
+              id="password"
+              name="password"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="**********"
               required
             />
           </div>
           <div class="w-full">
-            <label for="confirmar_senha" class="block mb-2 text-lg font-medium"
+            <label for="confPass" class="block mb-2 text-lg font-medium"
               >Confirmar Senha</label
             >
             <input
               type="password"
-              id="confirmar_senha"
-              name="confirmar_senha"
+              id="confPass"
+              name="confPass"
               class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="**********"
               required
             />
           </div>
         </div>
+        @if ($mensagem = Session::get('mensagem'))
+          {{ $mensagem }}<br>
+        @endif
         <div class="mt-8 flex justify-center">
           <button
             type="submit"

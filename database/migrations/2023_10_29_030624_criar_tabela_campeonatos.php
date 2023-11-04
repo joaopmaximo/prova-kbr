@@ -14,7 +14,8 @@ return new class extends Migration
             $table->id();
             $table->string('titulo_campeonato');
             $table->string('imagem');
-            $table->string('cidade_estado');
+            $table->string('estado');
+            $table->string('cidade');
             $table->date('data_realizacao');
             $table->string('sobre_evento');
             $table->string('ginasio');

@@ -3,8 +3,6 @@
 @section('conteudoAside')
 <div class="d-flex align-items-end justify-content-between mb-4">
                 <h1 class="h3">Cadastrar Campeonato</h1>
-
-                <a href="painel.html" class="btn btn-light">Voltar</a>
             </div>
 
             <form action="{{ route('postCampeonato') }}" method="POST" class="bg-custom rounded col-12 py-3 px-4" enctype="multipart/form-data">
@@ -112,7 +110,15 @@
                         </select>
                     </div>
                 </div>
-
+                @if($mensagem = Session::get('mensagem'))
+                    {{ $mensagem }}
+                @endif
+                @if($errors->any())
+                    @foreach($errors->all() as $erro)
+                        {{ $erro }}
+                        <br>
+                    @endforeach
+                @endif
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-light">Cadastrar</button>
                 </div>

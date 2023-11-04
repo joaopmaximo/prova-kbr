@@ -3,20 +3,21 @@
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\CampeonatoController;
 use App\Http\Controllers\AtletaController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/teste', function () {
-    dd(Auth::check());
+        dd(Auth::check());
 });
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
 
 Route::get('/integra/{id}', [PagesController::class, 'integra'])->name('integra');
 
-Route::view('/inscricao', 'area_atleta.inscricao-atleta')->name('inscricaoAtleta');
+Route::get('/inscricao/{id}', [CampeonatoController::class, 'inscricaoAtleta'])->name('inscricaoAtleta');
 
 Route::view('/login', 'area_atleta.login-atleta')->name('loginAtleta');
 
@@ -24,11 +25,11 @@ Route::get('/painel-administrativo/login', [UserController::class, 'painelAdmLog
 
 Route::post('/painel-administrativo/auth', [AuthController::class,'authUser'])->name('authUser');
 
-Route::post('/auth', [AuthController::class,'authAtleta'])->name('authAtleta');
+Route::post('/auth', [LoginController::class,'authAtleta'])->name('authAtleta');
 
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
-Route::post('/atleta', [AtletaController::class, 'postAtleta'])->name('postAtleta');
+Route::post('/atleta/{idCampeonato}', [AtletaController::class, 'postAtleta'])->name('postAtleta');
 
 Route::middleware(['auth', 'atletaRole'])->group(function () {
     
@@ -50,9 +51,13 @@ Route::middleware(['auth', 'userRole:0,1'])->group(function () {
 // rotas que so o admin pode acessar
 Route::middleware(['auth', 'userRole:1'])->group(function () {
 
-    Route::get('/painel-administrativo/cadastrar-usuario', [UserController::class, 'painelAdmCadastroUsuario'])->name('cadastrarUsuario');
+    Route::get('/painel-administrativo/cadastrar-usuario', [UserController::class, 'painelAdmCadastrarUsuario'])->name('cadastrarUsuario');
 
-    Route::get('/painel-administrativo/cadastrar-campeonato', [UserController::class, 'painelAdmCadastroCampeonato'])->name('cadastrarCampeonato');
+    Route::get('/painel-administrativo/editar-usuario/{id}', [UserController::class, 'painelAdmEditarUsuario'])->name('editarUsuario');
+    
+    Route::get('/painel-administrativo/cadastrar-campeonato', [UserController::class, 'painelAdmCadastrarCampeonato'])->name('cadastrarCampeonato');
+
+    Route::get('/painel-administrativo/editar-campeonato/{id}', [UserController::class, 'painelAdmEditarCampeonato'])->name('editarCampeonato');
 
     Route::get('/atletas', [AtletaController::class, 'getAtletas'])->name('getAtletas');
 

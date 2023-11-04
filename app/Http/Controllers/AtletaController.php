@@ -20,22 +20,30 @@ class AtletaController extends Controller
         return response()->json($atleta);
     }
 
-    public function postAtleta(Request $request) {
-        if ($request->confirmar_senha == $request->senha) {
-            $atleta =Atleta::create ([
+    public function postAtleta(Request $request, $idCampeonato) {
+        if ($request->confPass == $request->password) {
+            $atleta = Atleta::create ([
                 'nome' => $request->nome,
                 'data_nascimento' => $request->data_nascimento,
                 'cpf' => $request->cpf,
                 'sexo' => $request->sexo,
                 'email' => $request->email,
-                'senha'=> Hash::make($request->password),
+                'password'=> Hash::make($request->password),
                 'equipe' => $request->equipe,
                 'faixa' => $request->faixa,
                 'peso' => $request->peso
             ]);
-            return response()->json($atleta);
+
+            $this->joinCampeonato($atleta->id, $idCampeonato);
+
+            return redirect()->back()->with('mensagem', 'Atleta inscrito com sucesso!');
         }
-        return response(null, 400);
+        return redirect()->back()->with('mensagem', 'Senhas não conferem');
+    }
+
+    public function joinCampeonato($idAtleta, $idCampeonato) {
+        $atleta = Atleta::findOrFail($idAtleta);
+        $atleta->campeonatos()->attach($idCampeonato);
     }
 
     public function putAtleta(Request $request, $id) {
@@ -45,7 +53,7 @@ class AtletaController extends Controller
         $atleta->cpf = $request->cpf;
         $atleta->sexo = $request->sexo;
         $atleta->email = $request->email;
-        $atleta->senha = $request->senha;
+        $atleta->password = $request->password;
         $atleta->equipe = $request->equipe;
         $atleta->faixa = $request->faixa;
         $atleta->peso = $request->peso;
