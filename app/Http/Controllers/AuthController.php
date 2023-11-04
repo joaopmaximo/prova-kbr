@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campeonato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -13,6 +14,11 @@ class AuthController extends Controller
     public function __construct() {
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:atleta')->except('logout');
+    }
+
+    public function inscricaoAtleta($id) {
+        $campeonato = Campeonato::findOrFail($id);
+        return view('area_atleta.inscricao-atleta', compact('campeonato'));
     }
 
     public function loginAtleta() {

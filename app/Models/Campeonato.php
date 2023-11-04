@@ -25,6 +25,6 @@ class Campeonato extends Model
     ];
 
     public function atletas() {
-        return $this->belongsToMany(Campeonato::class);
+        return $this->belongsToMany(Atleta::class);
     }
 }

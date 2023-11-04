@@ -21,6 +21,10 @@ class AtletaController extends Controller
     }
 
     public function postAtleta(Request $request, $idCampeonato) {
+        if (Atleta::where('email', $request->email)->exists()) {
+            return redirect(route('loginAtleta'))->with('mensagem', 'Você já é cadastrado, faça o login para continuar!');
+        }
+
         if ($request->confPass == $request->password) {
             $atleta = Atleta::create ([
                 'nome' => $request->nome,
@@ -34,16 +38,11 @@ class AtletaController extends Controller
                 'peso' => $request->peso
             ]);
 
-            $this->joinCampeonato($atleta->id, $idCampeonato);
+            $atleta->joinCampeonato($idCampeonato);
 
             return redirect()->back()->with('mensagem', 'Atleta inscrito com sucesso!');
         }
         return redirect()->back()->with('mensagem', 'Senhas não conferem');
-    }
-
-    public function joinCampeonato($idAtleta, $idCampeonato) {
-        $atleta = Atleta::findOrFail($idAtleta);
-        $atleta->campeonatos()->attach($idCampeonato);
     }
 
     public function putAtleta(Request $request, $id) {
@@ -65,5 +64,11 @@ class AtletaController extends Controller
         $atleta =Atleta::findOrFail($id);
         $atleta->delete();
         return response(null, 204);
+    }
+
+    public function joinCampeonato($idAtleta, $idCampeonato) {
+        $atleta = Atleta::findOrFail($idAtleta);
+        $atleta->joinCampeonato($idCampeonato);
+        return redirect()->back();
     }
 }

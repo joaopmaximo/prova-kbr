@@ -7,12 +7,6 @@ use Illuminate\Http\Request;
 
 class CampeonatoController extends Controller
 {
-
-    public function inscricaoAtleta($id) {
-        $campeonato = Campeonato::findOrFail($id);
-        return view('area_atleta.inscricao-atleta', compact('campeonato'));
-    }
-
     public function getCampeonatos() {
         return response()->json(Campeonato::all());
     }

@@ -152,7 +152,22 @@
       {{ $campeonato->entrada_publico }}
       </div>
     </article>
-    <div class="mt-8 flex justify-center">
+    <div class="mt-8 flex flex-col items-center">
+    @if (Auth::guard('atleta')->check())
+        @if ($campeonato->atletas->contains(Auth::guard('atleta')->user()))
+          <h2 class="text-center text-3xl text-blue-700">
+            Você já está inscrito nesse torneio!
+          </h2>
+        @else
+          <a href="{{ route('atletaJoinCampeonato', ['idAtleta' => Auth::guard('atleta')->user()->id, 'idCampeonato' => $campeonato->id]) }}">
+            <button
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              Inscrever-se
+            </button>
+          </a>
+        @endif
+      @else
       <a
         href="{{ route('inscricaoAtleta', $campeonato->id) }}"
         class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800"
@@ -160,6 +175,7 @@
         Inscreva-se agora mesmo
       </a>
     </div>
+    @endif
     <div class="mt-8 flex justify-center">
       <a
         href="./chave_listagem.html"
