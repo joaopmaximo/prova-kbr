@@ -16,7 +16,6 @@ Route::get('/torneios', [PagesController::class, 'torneios'])->name('torneios');
 
 Route::redirect('/home', '/');
 
-
 Route::get('/inscricao/{id}', [AuthController::class, 'inscricaoAtleta'])->name('inscricaoAtleta');
 
 Route::get('/login', [AuthController::class, 'loginAtleta'])->name('loginAtleta');
@@ -35,14 +34,12 @@ Route::post('/atleta/{idCampeonato}', [AtletaController::class, 'postAtleta'])->
 
 Route::any('/torneios/search', [CampeonatoController::class,'filtrarCampeonatosTorneios'])->name('filtrarCampeonatosTorneios');
 
-
 Route::middleware('atletaRole')->group(function () {
     Route::get('/area-atleta', [AtletaController::class,'areaAtleta'])->name('areaAtleta');
     
     Route::get('/atletaJoinCampeonato/atleta-{idAtleta}-campeonato-{idCampeonato}', [AtletaController::class,'joinCampeonato'])->name('atletaJoinCampeonato');
 });
 
-// rotas que o usuario e admin podem acessar
 Route::middleware(['userRole:0,1'])->group(function () {
     Route::get('/painel-administrativo/listagem-campeonatos', [CampeonatoController::class, 'painelAdmListagemCampeonatos'])->name('listagemCampeonatos');
     
@@ -55,7 +52,6 @@ Route::middleware(['userRole:0,1'])->group(function () {
     Route::get('/painel-administrativo/listagem-usuarios', [UserController::class, 'painelAdm'])->name('listagemUsuarios');
 });
 
-// rotas que so o admin pode acessar
 Route::middleware(['userRole:1'])->group(function () {
     Route::get('/painel-administrativo/cadastrar-usuario', [UserController::class, 'painelAdmCadastrarUsuario'])->name('cadastrarUsuario');
 

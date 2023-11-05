@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Campeonato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller
 {
-    use AuthenticatesUsers;
-
     public function __construct() {
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:atleta')->except('logout');
