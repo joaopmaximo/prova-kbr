@@ -27,7 +27,7 @@ class AtletasTableSeeder extends Seeder
             'peso' => 'Leve'
         ]);
 
-        $atleta1->joinCampeonato(0);
+        $atleta1->joinCampeonato(1);
 
         $atleta2 = Atleta::create([
             'nome' => 'maria',

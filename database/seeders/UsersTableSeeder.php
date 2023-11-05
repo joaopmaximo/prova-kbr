@@ -20,42 +20,54 @@ class UsersTableSeeder extends Seeder
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('admin'),
                 'role' => 1,
-                'status' => 1
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'name' => 'JoaoSilva',
                 'email' => 'joao.silva@example.com',
                 'password' => Hash::make('senha123'),
                 'role' => 0,
-                'status' => 1
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'name' => 'MariaPereira',
                 'email' => 'maria.pereira@example.com',
                 'password' => Hash::make('senha456'),
                 'role' => 0,
-                'status' => 1
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'name' => 'PedroSantos',
                 'email' => 'pedro.santos@example.com',
                 'password' => Hash::make('senha789'),
                 'role' => 0,
-                'status' => 0
+                'status' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'name' => 'AnaOliveira',
                 'email' => 'ana.oliveira@example.com',
                 'password' => Hash::make('senhaABC'),
                 'role' => 0,
-                'status' => 0
+                'status' => 0,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'name' => 'CarlosCosta',
                 'email' => 'carlos.costa@example.com',
                 'password' => Hash::make('senhaXYZ'),
                 'role' => 0,
-                'status' => 1
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ]);
     }
