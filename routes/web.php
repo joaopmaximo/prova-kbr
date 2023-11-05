@@ -41,9 +41,11 @@ Route::middleware('atletaRole')->group(function () {
 
 // rotas que o usuario e admin podem acessar
 Route::middleware(['userRole:0,1'])->group(function () {
-    Route::get('/painel-administrativo/listagem-campeonatos', [UserController::class, 'painelAdmListagemCampeonatos'])->name('listagemCampeonatos');
+    Route::get('/painel-administrativo/listagem-campeonatos', [CampeonatoController::class, 'painelAdmListagemCampeonatos'])->name('listagemCampeonatos');
     
-    Route::any('/painel-administrativo/listagem-campeonatos/search', [UserController::class,'filtrar'])->name('filtrarPainel');
+    Route::any('/painel-administrativo/listagem-campeonatos/search', [CampeonatoController::class,'filtrarCampeonatos'])->name('filtrarCampeonatos');
+
+    Route::any('/painel-administrativo/listagem-usuarios/search', [UserController::class,'filtrarUsuarios'])->name('filtrarUsuarios');
 
     Route::get('/painel-administrativo', [UserController::class, 'painelAdm'])->name('painelAdm');
     
@@ -56,9 +58,13 @@ Route::middleware(['userRole:1'])->group(function () {
 
     Route::get('/painel-administrativo/editar-usuario/{id}', [UserController::class, 'painelAdmEditarUsuario'])->name('editarUsuario');
     
-    Route::get('/painel-administrativo/cadastrar-campeonato', [UserController::class, 'painelAdmCadastrarCampeonato'])->name('cadastrarCampeonato');
+    Route::get('/painel-administrativo/cadastrar-campeonato', [CampeonatoController::class, 'painelAdmCadastrarCampeonato'])->name('cadastrarCampeonato');
 
-    Route::get('/painel-administrativo/editar-campeonato/{id}', [UserController::class, 'painelAdmEditarCampeonato'])->name('editarCampeonato');
+    Route::get('/painel-administrativo/editar-campeonato/{id}', [CampeonatoController::class, 'painelAdmEditarCampeonato'])->name('editarCampeonato');
+
+    Route::post('painel-administrativo/listagem-campeonato/destacar-{id}', [CampeonatoController::class,'destacarCampeonato'])->name('destacarCampeonato');
+
+    Route::post('painel-administrativo/listagem-campeonato/remover-destaque-{id}', [CampeonatoController::class,'removerDestaqueCampeonato'])->name('removerDestaqueCampeonato');
 
     Route::get('/atletas', [AtletaController::class, 'getAtletas'])->name('getAtletas');
 

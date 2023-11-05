@@ -27,4 +27,16 @@ class Campeonato extends Model
     public function atletas() {
         return $this->belongsToMany(Atleta::class);
     }
+
+    public function destacar() {
+        $this['destaque'] = 1;
+        
+        return $this->save();
+    }
+
+    public function removerDestaque() {
+        $this['destaque'] = 0;
+
+        return $this->save();
+    }
 }

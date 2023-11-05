@@ -20,6 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             // 0 = usuario | 1 = admin
             $table->boolean('role')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

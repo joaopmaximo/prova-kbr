@@ -25,9 +25,8 @@
                     <label for="estado" class="col-sm-2 col-form-label">Estado:</label>
                     <div class="col-sm-10">
                         <select id="estado" name="estado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option selected value="none">Selecione o Estado</option>
+                        <option selected disabled value="">Selecione o Estado</option>
                         <option value="São Paulo">São Paulo</option>
-                        <option value="Minas Gerais">Minas Gerais</option>
                       </select>
                     </div>
                 </div>
@@ -36,8 +35,9 @@
                     <label for="cidade" class="col-sm-2 col-form-label">Cidade:</label>
                     <div class="col-sm-10">
                         <select id="cidade" name="cidade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option selected value="none">Selecione a Cidade</option>
-                            <option value="São Paulo">Santos</option>
+                            <option selected disabled value="">Selecione a Cidade</option>
+                            <option value="Santos">Santos</option>
+                            <option value="Praia Grande">Praia Grande</option>
                             <option value="São Vicente">São Vicente</option>
                         </select>
                     </div>
@@ -82,7 +82,7 @@
                     <label for="tipo" class="col-sm-2 col-form-label">Tipo:</label>
                     <div class="col-sm-10">
                         <select id="tipo" name="tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option selected value="none">Selecione o Tipo</option>
+                            <option selected disabled value="">Selecione o Tipo</option>
                             <option value="Kimono">Kimono</option>
                             <option value="No-Gi">No-Gi</option>
                         </select>
@@ -93,7 +93,7 @@
                     <label for="fase" class="col-sm-2 col-form-label">Fase:</label>
                     <div class="col-sm-10">
                         <select id="fase" name="fase" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option selected value="none">Selecione a Fase</option>
+                            <option selected disabled value="">Selecione a Fase</option>
                             <option value="Inscrições Abertas">Inscrições Abertas</option>
                             <option value="Chaves de Lutas">Chaves de Lutas</option>
                             <option value="Resultados">Resultados</option>
@@ -105,8 +105,9 @@
                     <label for="status" class="col-sm-2 col-form-label">Status:</label>
                     <div class="col-sm-10">
                         <select name="status">
+                            <option selected disabled value="">Selecione o status</option>
+                            <option value="1">Ativo</option>
                             <option value="0">Inativo</option>
-                            <option value="1" selected>Ativo</option>
                         </select>
                     </div>
                 </div>

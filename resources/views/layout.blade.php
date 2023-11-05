@@ -143,7 +143,7 @@
             >
           </li>
           <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6"
+            <a href="{{ route('areaAtleta') }}" class="mr-4 hover:underline md:mr-6"
               >Área do competidor</a
             >
           </li>

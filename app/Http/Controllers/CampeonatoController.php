@@ -93,4 +93,60 @@ class CampeonatoController extends Controller
 
         return redirect()->back();
     }
+
+    public function destacarCampeonato($id) {
+        $campeonato = Campeonato::findorFail($id);
+        $campeonato->destacar();
+
+        return redirect()->back();
+    }
+
+    public function removerDestaqueCampeonato($id) {
+        $campeonato = Campeonato::findorFail($id);
+        $campeonato->removerDestaque();
+
+        return redirect()->back();
+    }
+    
+    public function filtrarCampeonatos(Request $request)  {
+        $busca = $request->busca;
+        $status = $request->status;
+        $dataInicio = $request->de;
+        $dataFinal = $request->ate;
+        $destaques = Campeonato::where('destaque', 1)->orderBy("created_at","desc")->take(8)->get();
+
+        $filtros = $request->all();
+
+        $campeonatos = Campeonato::where('titulo_campeonato', 'LIKE', "%$busca%")
+        ->when($status !== null, function ($query) use ($status) {
+            return $query->where('status', $status);
+        })
+        ->when($dataInicio !== null, function ($query) use ($dataInicio) {
+            return $query->whereDate('data_realizacao', '>=', $dataInicio);
+        })
+        ->when($dataFinal !== null, function ($query) use ($dataFinal) {
+            return $query->whereDate('data_realizacao', '<=', $dataFinal);
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(3);
+
+        return view("painel_administrativo.listagem-campeonatos", compact('campeonatos','filtros', 'destaques'));
+    }
+
+    public function painelAdmCadastrarCampeonato() {
+        return view('painel_administrativo.cadastrar-campeonato');
+    }
+
+    public function painelAdmListagemCampeonatos() {
+        $campeonatos = Campeonato::where('destaque', '!=', 1)->orderBy("created_at","desc")->paginate(4);;
+        $destaques = Campeonato::where('destaque', 1)->orderBy("created_at","desc")->paginate(4);
+        
+        return view('painel_administrativo.listagem-campeonatos', compact('campeonatos', 'destaques'));
+    }
+
+    public function painelAdmEditarCampeonato($id) {
+        $campeonato = Campeonato::findOrFail($id);
+
+        return view('painel_administrativo.editar-campeonato', compact('campeonato'));
+    }
 }
