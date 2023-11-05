@@ -17,11 +17,13 @@ DB_PASSWORD={PASSWORD_DB}
 composer install
 php artisan key:generate 
 php artisan migrate --seed
+
 ```
 
 * iniciar aplicação:
 ```powershell
 php artisan serve
+
 ```
 
 ## Acessos
