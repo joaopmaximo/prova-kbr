@@ -15,6 +15,8 @@ Route::get('/teste', function () {
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
 
+Route::get('/torneios', [PagesController::class, 'torneios'])->name('torneios');
+
 Route::redirect('/home', '/');
 
 Route::get('/integra/{id}', [PagesController::class, 'integra'])->name('integra');

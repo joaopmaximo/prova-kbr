@@ -32,10 +32,16 @@ class PagesController extends Controller
     );
 
     public function home() {
-        $campeonatos = Campeonato::orderBy("created_at","desc")->take(8)->get();
+        $campeonatos = Campeonato::where('destaque', '!=', 1)->orderBy("created_at","desc")->take(8)->get();
         $destaques = Campeonato::where('destaque', 1)->orderBy("created_at","desc")->take(8)->get();
         
         return view('home', ['campeonatos' => $campeonatos, 'destaques' => $destaques, 'mes' => $this->mes]);
+    }
+
+    public function torneios() {
+        $campeonatos = Campeonato::orderBy("created_at","desc")->paginate(8);
+        
+        return view('torneios', ['campeonatos' => $campeonatos, 'mes' => $this->mes]);
     }
     
     public function integra($id) {

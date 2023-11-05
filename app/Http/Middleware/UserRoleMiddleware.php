@@ -20,6 +20,6 @@ class UserRoleMiddleware
         if (Auth::check() && in_array(Auth::user()->role, $role)) {
             return $next($request);
         }
-        return redirect(route('index'));
+        return redirect(route('home'));
     }
 }

@@ -35,7 +35,7 @@ class UserController extends Controller
     }
     
     public function painelAdm() {
-        $usuarios = User::orderBy("created_at","asc")->paginate(3);;
+        $usuarios = User::orderBy("created_at","asc")->paginate(4);;
 
         return view('painel_administrativo.listagem-usuarios', compact('usuarios'));
     }
