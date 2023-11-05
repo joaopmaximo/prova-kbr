@@ -32,7 +32,7 @@ class PagesController extends Controller
     );
 
     public function home() {
-        $campeonatos = Campeonato::orderBy("created_at","desc")->get();
+        $campeonatos = Campeonato::orderBy("created_at","desc")->take(4)->get();
         
         return view('home', ['campeonatos' => $campeonatos, 'mes' => $this->mes]);
     }

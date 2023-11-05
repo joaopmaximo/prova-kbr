@@ -88,6 +88,7 @@ class CampeonatoController extends Controller
 
     public function deleteCampeonato($id) {
         $campeonato =Campeonato::findOrFail($id);
+        $campeonato->atletas()->detach();
         $campeonato->delete();
 
         return redirect()->back();

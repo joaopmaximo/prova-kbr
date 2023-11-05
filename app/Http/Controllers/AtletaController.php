@@ -62,8 +62,9 @@ class AtletaController extends Controller
 
     public function deleteAtleta($id) {
         $atleta =Atleta::findOrFail($id);
+        $atleta->campeonatos()->detach();
         $atleta->delete();
-        return response(null, 204);
+        return redirect()->back();
     }
 
     public function joinCampeonato($idAtleta, $idCampeonato) {

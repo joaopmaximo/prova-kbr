@@ -5,14 +5,12 @@ use App\Http\Controllers\CampeonatoController;
 use App\Http\Controllers\AtletaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Models\Atleta;
-use App\Models\Campeonato;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/teste', function () {
-    $atleta = Atleta::findOrFail(1);
-    $atleta->joinCampeonato(4);
+    $request = ['filtro' => 'beleza'];
+    $url = "localhost:8000/teste";
+    echo $url . $request[0];
 });
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
@@ -42,8 +40,10 @@ Route::middleware('atletaRole')->group(function () {
 });
 
 // rotas que o usuario e admin podem acessar
-Route::middleware(['auth', 'userRole:0,1'])->group(function () {
+Route::middleware(['userRole:0,1'])->group(function () {
     Route::get('/painel-administrativo/listagem-campeonatos', [UserController::class, 'painelAdmListagemCampeonatos'])->name('listagemCampeonatos');
+    
+    Route::any('/painel-administrativo/listagem-campeonatos/search', [UserController::class,'filtrar'])->name('filtrarPainel');
 
     Route::get('/painel-administrativo', [UserController::class, 'painelAdm'])->name('painelAdm');
     
@@ -51,7 +51,7 @@ Route::middleware(['auth', 'userRole:0,1'])->group(function () {
 });
 
 // rotas que so o admin pode acessar
-Route::middleware(['auth', 'userRole:1'])->group(function () {
+Route::middleware(['userRole:1'])->group(function () {
     Route::get('/painel-administrativo/cadastrar-usuario', [UserController::class, 'painelAdmCadastrarUsuario'])->name('cadastrarUsuario');
 
     Route::get('/painel-administrativo/editar-usuario/{id}', [UserController::class, 'painelAdmEditarUsuario'])->name('editarUsuario');

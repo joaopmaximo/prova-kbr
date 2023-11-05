@@ -20,6 +20,34 @@ class UserController extends Controller
         return view('painel_administrativo.login');
     }
 
+    public function filtrar(Request $request)  {
+        $busca = $request->busca;
+        $status = $request->status;
+        $dataInicio = $request->de;
+        $dataFinal = $request->ate;
+        $filtros = $request->all();
+
+        /*if(is_null($status)) {
+            $campeonatos = Campeonato::where('titulo_campeonato', 'LIKE', "%$busca%")
+            ->orderBy("created_at","desc")
+            ->paginate(2);
+        } else {
+            $campeonatos = Campeonato::where('titulo_campeonato', 'LIKE', "%$busca%")
+            ->where('status', $status)
+            ->orderBy("created_at","desc")
+            ->paginate(2);
+        }*/
+
+        $campeonatos = Campeonato::where('titulo_campeonato', 'LIKE', "%$busca%")
+            ->where('status', $status)
+            ->whereDate('data_realizacao', '>=', $dataInicio)
+            ->whereDate('data_realizacao', '<=', $dataFinal)
+            ->orderBy('created_at',"desc")
+            ->paginate(2);
+
+        return view("painel_administrativo.listagem-campeonatos", compact('campeonatos','filtros'));
+    }
+    
     public function painelAdm() {
         $usuarios = User::all();
         return view('painel_administrativo.listagem-usuarios', compact('usuarios'));
@@ -37,10 +65,14 @@ class UserController extends Controller
     public function painelAdmCadastrarCampeonato() {
         return view('painel_administrativo.cadastrar-campeonato');
     }
+    public function painelAdmListagemCampeonatos($campeonatos = null, $filtros = null) {
+        $campeonatos = $campeonatos ?? Campeonato::orderBy("created_at","desc")->paginate(2);;
 
-    public function painelAdmListagemCampeonatos() {
-        $campeonatos = Campeonato::all();
-        return view('painel_administrativo.listagem-campeonatos', compact('campeonatos'));
+        if(is_null($filtros)) {
+            return view('painel_administrativo.listagem-campeonatos', compact('campeonatos'));
+        }
+        
+        return view('painel_administrativo.listagem-campeonatos', compact('campeonatos', 'filtros'));
     }
 
     public function painelAdmEditarCampeonato($id) {
