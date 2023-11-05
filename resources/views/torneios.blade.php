@@ -56,8 +56,10 @@
       </div>
     </div>
     <form
+      action="{{ route('filtrarCampeonatosTorneios') }}" method="POST"
       class="rounded-lg shadow max-w-7xl m-4 md:mx-auto md:mt-4 outline outline-1 outline-gray-300 p-4 flex flex-col lg:flex-row gap-2"
     >
+      @csrf
       <div class="flex-1">
         <label
           for="Título do evento"
@@ -67,9 +69,9 @@
         <input
           type="text"
           id="Título do evento"
+          name="busca"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Nome do evento"
-          required
         />
       </div>
       <div>
@@ -78,9 +80,10 @@
         >
         <select
           id="tipo"
+          name="tipo"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
-          <option selected value="none">Escolha um tipo</option>
+          <option selected value="">Escolha um tipo</option>
           <option value="kimono">Kimono</option>
           <option value="no-gi">No Gi</option>
         </select>
@@ -91,11 +94,12 @@
         >
         <select
           id="estado"
+          name="estado"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
-          <option selected value="none">Escolha um estado</option>
-          <option value="SP">São Paulo</option>
-          <option value="RJ">Rio de Janeiro</option>
+          <option selected value="">Escolha um estado</option>
+          <option value="São Paulo">São Paulo</option>
+          <option value="Rio de Janeiro">Rio de Janeiro</option>
         </select>
       </div>
       <div>
@@ -105,9 +109,9 @@
         <input
           type="text"
           id="cidade"
+          name="cidade"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Cidade do torneio"
-          required
         />
       </div>
       <div class="flex items-end">
@@ -194,7 +198,7 @@
                 </p>
               </div>
               <a
-                href="{{ route('integra', ['id' => $campeonato->id]) }}"
+                href="{{ route('integra', ['id' => $campeonato->id, 'titulo_campeonato' => Str::slug($campeonato->titulo_campeonato)]) }}"
                 title="Saiba mais sobre Campeonato regional santista 2023"
                 class="absolute inset-0"
               ></a>

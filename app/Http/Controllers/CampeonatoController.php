@@ -7,6 +7,21 @@ use Illuminate\Http\Request;
 
 class CampeonatoController extends Controller
 {
+    public $mes = array(
+        'Jan' => 'Jan',
+        'Feb' => 'Fev',
+        'Mar' => 'Mar',
+        'Apr' => 'Abr',
+        'May' => 'Mai',
+        'Jun' => 'Jun',
+        'Jul' => 'Jul',
+        'Aug' => 'Ago',
+        'Nov' => 'Nov',
+        'Sep' => 'Set',
+        'Oct' => 'Out',
+        'Dec' => 'Dez'
+    );
+    
     public function getCampeonatos() {
         return response()->json(Campeonato::all());
     }
@@ -107,17 +122,57 @@ class CampeonatoController extends Controller
 
         return redirect()->back();
     }
-    
-    public function filtrarCampeonatos(Request $request)  {
+
+    public function filtrarCampeonatosTorneios(Request $request)  {
         $busca = $request->busca;
-        $status = $request->status;
-        $dataInicio = $request->de;
-        $dataFinal = $request->ate;
-        $destaques = Campeonato::where('destaque', 1)->orderBy("created_at","desc")->take(8)->get();
+        $tipo = $request->tipo;
+        $cidade = $request->cidade;
+        $estado = $request->estado;
 
         $filtros = $request->all();
 
         $campeonatos = Campeonato::where('titulo_campeonato', 'LIKE', "%$busca%")
+        ->when($busca !== null, function ($query) use ($busca) {
+            return $query->where('titulo_campeonato', 'LIKE',  "%$busca%");
+        })
+        ->when($tipo !== null, function ($query) use ($tipo) {
+            return $query->where('tipo', $tipo);
+        })
+        ->when($cidade !== null, function ($query) use ($cidade) {
+            return $query->where('cidade', $cidade);
+        })
+        ->when($estado !== null, function ($query) use ($estado) {
+            return $query->where('estado', $estado);
+        })
+        ->where('status', 1)
+        ->orderBy('created_at', 'desc')
+        ->paginate(8);
+
+        return view("torneios", ['campeonatos' => $campeonatos,'filtros' => $filtros, 'mes' => $this->mes]);
+    }
+    
+    public function filtrarCampeonatosPainel(Request $request)  {
+        $busca = $request->busca;
+        $status = $request->status;
+        $tipo = $request->tipo;
+        $cidade = $request->cidade;
+        $estado = $request->estado;
+        $dataInicio = $request->de;
+        $dataFinal = $request->ate;
+        $destaques = Campeonato::where('destaque', 1)->orderBy("created_at","desc")->paginate(4);
+
+        $filtros = $request->all();
+
+        $campeonatos = Campeonato::where('titulo_campeonato', 'LIKE', "%$busca%")
+        ->when($tipo !== null, function ($query) use ($tipo) {
+            return $query->where('tipo', $tipo);
+        })
+        ->when($cidade !== null, function ($query) use ($cidade) {
+            return $query->where('cidade', $cidade);
+        })
+        ->when($estado !== null, function ($query) use ($estado) {
+            return $query->where('cidade', $estado);
+        })
         ->when($status !== null, function ($query) use ($status) {
             return $query->where('status', $status);
         })
@@ -128,7 +183,7 @@ class CampeonatoController extends Controller
             return $query->whereDate('data_realizacao', '<=', $dataFinal);
         })
         ->orderBy('created_at', 'desc')
-        ->paginate(3);
+        ->paginate(4);
 
         return view("painel_administrativo.listagem-campeonatos", compact('campeonatos','filtros', 'destaques'));
     }

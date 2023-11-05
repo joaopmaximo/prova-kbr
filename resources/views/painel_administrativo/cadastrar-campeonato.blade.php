@@ -6,7 +6,7 @@
             </div>
 
             <form action="{{ route('postCampeonato') }}" method="POST" class="bg-custom rounded col-12 py-3 px-4" enctype="multipart/form-data">
-                
+                @csrf
                 <div class="mb-3 row">
                     <label for="titulo_campeonato" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">

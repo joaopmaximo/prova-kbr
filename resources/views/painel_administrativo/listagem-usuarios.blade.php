@@ -24,7 +24,7 @@
 
 <div class="d-flex justify-content-between align-items-end mb-3">
     <form action="{{ route('filtrarUsuarios') }}" method="POST" class="bg-custom rounded col-12 py-3 px-4">
-        
+        @csrf
         <div class="row align-items-end row-gap-4">
             <div class="col-3 d-flex flex-wrap">
                 <label for="search" class="col-form-label">Buscar:</label>
@@ -75,7 +75,9 @@
                 <th scope="col" class="text-uppercase">E-mail</th>
                 <th scope="col" class="text-uppercase">Criado Em</th>
                 <th scope="col" class="text-uppercase">Status</th>
+                @if (Auth::user()->role == 1)
                 <th scope="col" class="text-uppercase text-center">Ações</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -99,6 +101,7 @@
                     <td>{{ $usuario->email }}</td>
                     <td>{{ date('d/m/Y', strtotime($usuario->created_at)) }}</td>
                     <td>{{ $usuario->status == 1 ? 'ativado' : 'desativado' }}</td>
+                    @if (Auth::user()->role == 1)
                     <td>
                         <div class="d-flex justify-content-center">
                             <button type="button" class="btn btn-light d-flex justify-content-center align-items-center rounded-circle p-2 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -124,6 +127,7 @@
                             </form>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             @endif

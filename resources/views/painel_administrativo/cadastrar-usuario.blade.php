@@ -5,7 +5,7 @@
     <h1 class="h3">Cadastrar Usuário</h1>
 </div>
 <form action="{{ route('postUser') }}" method="POST" class="bg-custom rounded col-12 py-3 px-4">
-    
+    @csrf
     <div class="mb-3 row">
         <label for="usuario" class="col-sm-2 col-form-label">Usuário:</label>
         <div class="col-sm-10">

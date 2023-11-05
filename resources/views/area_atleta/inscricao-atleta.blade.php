@@ -96,6 +96,7 @@
     </section>
     <main class="max-w-7xl mx-2 lg:mx-auto">
       <form class="py-12" action="{{ route('postAtleta', ['idCampeonato' => $campeonato->id]) }}" method="POST">
+        @csrf
         <h2 class="text-center text-3xl text-blue-700 mt-4 mb-8">
           Formulário de inscrição para o torneio
         </h2>

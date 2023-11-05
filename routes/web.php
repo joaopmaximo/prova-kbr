@@ -8,9 +8,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/teste', function () {
-    $request = ['filtro' => 'beleza'];
-    $url = "localhost:8000/teste";
-    echo $url . $request[0];
 });
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
@@ -19,11 +16,12 @@ Route::get('/torneios', [PagesController::class, 'torneios'])->name('torneios');
 
 Route::redirect('/home', '/');
 
-Route::get('/integra/{id}', [PagesController::class, 'integra'])->name('integra');
 
 Route::get('/inscricao/{id}', [AuthController::class, 'inscricaoAtleta'])->name('inscricaoAtleta');
 
 Route::get('/login', [AuthController::class, 'loginAtleta'])->name('loginAtleta');
+
+Route::get('/campeonato/{titulo_campeonato}/{id}', [PagesController::class, 'integra'])->name('integra');
 
 Route::get('/painel-administrativo/login', [AuthController::class, 'loginUser'])->name('loginUser');
 
@@ -35,9 +33,12 @@ Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
 Route::post('/atleta/{idCampeonato}', [AtletaController::class, 'postAtleta'])->name('postAtleta');
 
+Route::any('/torneios/search', [CampeonatoController::class,'filtrarCampeonatosTorneios'])->name('filtrarCampeonatosTorneios');
+
+
 Route::middleware('atletaRole')->group(function () {
     Route::get('/area-atleta', [AtletaController::class,'areaAtleta'])->name('areaAtleta');
-
+    
     Route::get('/atletaJoinCampeonato/atleta-{idAtleta}-campeonato-{idCampeonato}', [AtletaController::class,'joinCampeonato'])->name('atletaJoinCampeonato');
 });
 
@@ -45,7 +46,7 @@ Route::middleware('atletaRole')->group(function () {
 Route::middleware(['userRole:0,1'])->group(function () {
     Route::get('/painel-administrativo/listagem-campeonatos', [CampeonatoController::class, 'painelAdmListagemCampeonatos'])->name('listagemCampeonatos');
     
-    Route::any('/painel-administrativo/listagem-campeonatos/search', [CampeonatoController::class,'filtrarCampeonatos'])->name('filtrarCampeonatos');
+    Route::any('/painel-administrativo/listagem-campeonatos/search', [CampeonatoController::class,'filtrarCampeonatosPainel'])->name('filtrarCampeonatosPainel');
 
     Route::any('/painel-administrativo/listagem-usuarios/search', [UserController::class,'filtrarUsuarios'])->name('filtrarUsuarios');
 

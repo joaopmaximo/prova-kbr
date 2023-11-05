@@ -9,7 +9,7 @@
     </div>
 
     <form action="{{ route('putCampeonato', $campeonato->id) }}" method="POST" class="bg-custom rounded col-12 py-3 px-4" enctype="multipart/form-data">
-        
+        @csrf
         @method('PUT')
 
         <div class="mb-3 row">

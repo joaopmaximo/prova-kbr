@@ -71,18 +71,11 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request) {
-        if (Auth::guard('atleta')->check()) {
-            Auth::guard('atleta')->logout();
-            Auth::logout();
-            return redirect(route('loginAtleta'));
-        } else {
-            Auth::guard('atleta')->logout();
-            Auth::logout();
-    
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-    
-            return redirect(route('loginUser'));
-        }
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 }

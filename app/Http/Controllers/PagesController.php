@@ -39,16 +39,15 @@ class PagesController extends Controller
     }
 
     public function torneios() {
-        $campeonatos = Campeonato::orderBy("created_at","desc")->paginate(8);
+        $campeonatos = Campeonato::orderBy("created_at","desc")->where('status', 1)->paginate(8);
         
         return view('torneios', ['campeonatos' => $campeonatos, 'mes' => $this->mes]);
     }
     
-    public function integra($id) {
+    public function integra($titulo_campeonato = "", $id) {
         $campeonato = Campeonato::find($id);
         
         return view('integra', ['campeonato' => $campeonato, 'mes' => $this->mes, 'semana' => $this->semana]);
     }
 
-    
 }

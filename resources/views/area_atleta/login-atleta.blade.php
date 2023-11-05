@@ -24,6 +24,7 @@
             Entre na sua conta
         </h1>
         <form class="space-y-4 md:space-y-6" action="{{ route('authAtleta') }}" method="POST">
+            @csrf
             <div>
             <label
                 for="email"
