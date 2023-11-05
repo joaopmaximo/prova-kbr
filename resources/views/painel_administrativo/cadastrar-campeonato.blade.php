@@ -27,6 +27,7 @@
                         <select id="estado" name="estado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option selected disabled value="">Selecione o Estado</option>
                         <option value="São Paulo">São Paulo</option>
+                        <option value="Rio de Janeiro">Rio de Janeiro</option>
                       </select>
                     </div>
                 </div>
@@ -34,12 +35,7 @@
                 <div class="mb-3 row">
                     <label for="cidade" class="col-sm-2 col-form-label">Cidade:</label>
                     <div class="col-sm-10">
-                        <select id="cidade" name="cidade" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option selected disabled value="">Selecione a Cidade</option>
-                            <option value="Santos">Santos</option>
-                            <option value="Praia Grande">Praia Grande</option>
-                            <option value="São Vicente">São Vicente</option>
-                        </select>
+                        <input type="text" class="form-control bg-dark text-light border-dark" id="cidade" name="cidade">
                     </div>
                 </div>
 
