@@ -7,9 +7,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/teste', function () {
-});
-
 Route::get('/', [PagesController::class, 'home'])->name('home');
 
 Route::get('/torneios', [PagesController::class, 'torneios'])->name('torneios');
